@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'org.ready.bitebyte'
+version = '1.0.0'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitLab"
+            url = uri("https://gitlab.com/api/v4/projects/1040232/packages/maven") // ⛔ 이 ID 다시 확인
+            credentials {
+                username = "respectwo" // GitLab 사용자명
+                password = System.getenv("GITLAB_PRIVATE_TOKEN") // 환경변수로 교체 추천
+            }
+        }
+    }
+}
